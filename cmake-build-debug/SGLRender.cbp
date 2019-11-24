@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="SGLRender"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/mm/Documents/project/clion/SGLRender/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/mm/Documents/project/clion/SGLRender/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="SGLRender">
+				<Option output="/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/SGLRender" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mm/Documents/project/clion/SGLRender/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 SGLRender"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="SGLRender/fast">
+				<Option output="/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/SGLRender" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mm/Documents/project/clion/SGLRender/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 SGLRender/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/mm/Documents/project/clion/SGLRender/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/mm/Documents/project/clion/SGLRender/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Attrib.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Attrib.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Camera.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Camera.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Common.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Common.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Geometry.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Geometry.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/IndexBuffer.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/IndexBuffer.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Line.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Line.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Object3D.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Object3D.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/SGL.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Scene.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Scene.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Shader.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Shader.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/ShaderMaterial.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/ShaderMaterial.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Texture.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Texture.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/TriMesh.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/TriMesh.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Uniform.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/Uniform.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/UniformValue.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/UniformValue.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/VertexBuffer.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/VertexBuffer.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/main.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/stb_image.cpp">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/stb_image.h">
+			<Option target="SGLRender"/>
+		</Unit>
+		<Unit filename="/home/mm/Documents/project/clion/SGLRender/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

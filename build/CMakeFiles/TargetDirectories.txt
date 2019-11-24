@@ -1,0 +1,3 @@
+/home/mm/Documents/project/clion/extract_from_bmp_image/cmake-build-debug/test/SGLRender/build/CMakeFiles/rebuild_cache.dir
+/home/mm/Documents/project/clion/extract_from_bmp_image/cmake-build-debug/test/SGLRender/build/CMakeFiles/SGLRender.dir
+/home/mm/Documents/project/clion/extract_from_bmp_image/cmake-build-debug/test/SGLRender/build/CMakeFiles/edit_cache.dir
