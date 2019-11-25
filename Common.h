@@ -73,7 +73,7 @@ enum  TextureDataType {
 
 int SizeOfTextureDataType(TextureDataType type);
 
-
+void PrintGLError(int error);
 
 
 

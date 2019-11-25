@@ -42,7 +42,7 @@ protected:
     unsigned handle() const{
         return m_handle;
     }
-    virtual void bind(unsigned unit) = 0;
+    virtual void bind(Uniform *u) = 0;
 protected:
     unsigned m_handle;
     TextureParameter m_minFilter, m_magFilter;
@@ -89,7 +89,7 @@ private:
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, int(m_tWrap));
     }
 private:
-    void bind(unsigned unit) override;
+    void bind(Uniform *u) override;
 
     Texture2D(){
         m_pendingData.data = nullptr;
@@ -132,7 +132,7 @@ public:
         }
     }
 private:
-    void bind(unsigned unit) override ;
+    void bind(Uniform *u) override ;
     TextureCube() {
         m_pendingData.data = nullptr;
         m_pendingData.level = -1;

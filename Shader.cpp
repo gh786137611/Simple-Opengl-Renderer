@@ -60,7 +60,7 @@ void Shader::get_active_uniforms() {
     int samplerNum = 0;
     for (int i= 0; i<num; ++i){
         glGetActiveUniform(m_program, i, 512, &length, &size, &type, name);
-        cout << "name: " << name << ", size: " << size <<", type: " <<  type_to_name(type)<<endl;
+        //cout << "name: " << name << ", size: " << size <<", type: " <<  type_to_name(type)<<endl;
         Uniform uniform = Uniform(glGetUniformLocation(m_program, name),size, name, -1);
         if (is_sampler(type)) {
             uniform.m_textureUnit = samplerNum;

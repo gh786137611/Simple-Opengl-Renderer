@@ -14,7 +14,7 @@ SGL_BEGIN
 Line::Line(std::shared_ptr<SGL::Geometry> geometry, std::shared_ptr<SGL::ShaderMaterial> material) {
     m_geometry = geometry;
     m_material = material;
-    set_line_width(10.0f);
+    set_line_width(1.0f);
 }
 
 std::shared_ptr<Line> Line::create(std::shared_ptr<Geometry> geometry, std::shared_ptr<ShaderMaterial> material) {

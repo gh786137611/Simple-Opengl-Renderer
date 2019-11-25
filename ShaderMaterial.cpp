@@ -16,16 +16,12 @@ SGL_BEGIN
 
 ShaderMaterial::ShaderMaterial(std::shared_ptr<Shader> & shader) {
     m_shader = shader;
-    m_blend = [](){
-        glDisable(GL_BLEND);
-    };
-    m_depthTest = [](){
-        glEnable(GL_DEPTH_TEST);
-    };
+    set_depthTest(true);
+    set_blend(false);
 }
 
 
-void ShaderMaterial::set_texture(const std::string &name, std::shared_ptr<Texture> &texture) {
+void ShaderMaterial::set_texture(const std::string &name, std::shared_ptr<Texture> texture) {
     m_textures[name] = texture;
 }
 
@@ -59,7 +55,7 @@ void ShaderMaterial::bind_uniforms() {
         } else{ // uniform for sampler
             std::map<std::string, std::shared_ptr<Texture>>::iterator it = m_textures.find(u.m_name);
             if (it != m_textures.end()){
-                it->second->bind(u.m_textureUnit);
+                it->second->bind(&u);
             }
         }
     }

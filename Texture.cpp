@@ -3,6 +3,7 @@
 //
 
 #include "Texture.h"
+#include "Uniform.h"
 
 
 SGL_BEGIN
@@ -28,16 +29,16 @@ Texture2D::~Texture2D() {
 }
 
 
-void Texture2D::bind(unsigned unit) {
+void Texture2D::bind(Uniform *u) {
     if (0 == m_handle) {
         glGenTextures(1, &m_handle);
     }
     assert(m_handle);
     if (m_pendingData.level < 0) {
-        glActiveTexture(GL_TEXTURE0 + unit);
+        glActiveTexture(GL_TEXTURE0 + u->m_textureUnit);
         glBindTexture(GL_TEXTURE_2D, m_handle);
     }else {
-        glActiveTexture(GL_TEXTURE0 + unit);
+        glActiveTexture(GL_TEXTURE0 + u->m_textureUnit);
         glBindTexture(GL_TEXTURE_2D, m_handle);
         glTexImage2D(GL_TEXTURE_2D, m_pendingData.level, int(m_pendingData.internal), m_pendingData.width, m_pendingData.height, 0,
                      int(m_pendingData.external), int(m_pendingData.type), m_pendingData.data);
@@ -56,19 +57,19 @@ void Texture2D::bind(unsigned unit) {
         glGenerateMipmap(GL_TEXTURE_2D);
         m_needsGenerateMipmap = false;
     }
-    glUniform1i(GL_TEXTURE_2D, unit);
+    glUniform1i(u->m_location, u->m_textureUnit);
 }
 
-void TextureCube::bind(unsigned unit) {
+void TextureCube::bind(Uniform *u) {
     if (0 == m_handle) {
         glGenTextures(1, &m_handle);
     }
     assert(m_handle);
     if (m_pendingData.level < 0) {
-        glActiveTexture(GL_TEXTURE0 + unit);
+        glActiveTexture(GL_TEXTURE0 + u->m_textureUnit);
         glBindTexture(GL_TEXTURE_CUBE_MAP, m_handle);
     }else {
-        glActiveTexture(GL_TEXTURE0 + unit);
+        glActiveTexture(GL_TEXTURE0 + u->m_textureUnit);
         glBindTexture(GL_TEXTURE_CUBE_MAP, m_handle);
         int len = m_pendingData.width * m_pendingData.height * ChannelOfPixelFormat(m_pendingData.external) * SizeOfTextureDataType(m_pendingData.type);
         for (int i = 0; i<6; ++i) {
@@ -84,6 +85,7 @@ void TextureCube::bind(unsigned unit) {
             delete[]m_pendingData.data;
             m_pendingData.data = nullptr;
         }
+
     }
     if (m_needsUpdateParameter) {
         update_parameter();
@@ -93,7 +95,8 @@ void TextureCube::bind(unsigned unit) {
         glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
         m_needsGenerateMipmap = false;
     }
-    glUniform1i(GL_TEXTURE_CUBE_MAP, unit);
+
+    glUniform1i(u->m_location, u->m_textureUnit);
 }
 
 

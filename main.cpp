@@ -15,7 +15,7 @@ shared_ptr<PerspectiveCamera> perspectiveCamera;
 int WinX = 512, WinY = 512;
 
 const string vert = R"(
-#version 130
+#version 330 core
 in vec3 position;
 uniform mat4 modelviewMatrix;
 uniform mat4 projectionMatrix;
@@ -70,7 +70,6 @@ void main() {
 
 void initializeGL() {
     glClearColor(0.6,0.0,0.6,1.0);
-    glEnable(GL_DEPTH_TEST);
 
     shared_ptr<Geometry> box = Geometry::create_unit_box();
     shared_ptr<Shader> shader = Shader::create(vert, frag);
@@ -90,11 +89,11 @@ void initializeGL() {
     textureCube->set_wrap(TextureParameter::ClampToEdge, TextureParameter::ClampToEdge,TextureParameter::ClampToEdge);
 
     for (auto e:data) stbi_image_free(e);
-    shared_ptr<Texture> tmp(textureCube);
-    material->set_texture("cube", tmp);
+    material->set_texture("cube", textureCube);
     material->set_value("mask", vec4(1,0,1,1));
     shared_ptr<Object3D> mesh = TriMesh::create(box, material);
-    mesh->set_scale(200.0, 200.0, 200.0);
+    float scale = 300.0;
+    mesh->set_scale(scale,scale,scale);
 
     scene = Scene::create();
     scene->add(mesh);
@@ -102,7 +101,6 @@ void initializeGL() {
         auto shader = Shader::create(vert2,frag2);
         auto material = ShaderMaterial::create(shader);
         material->set_blend(true);
-        material->set_depthTest(false);
         auto childBox = TriMesh::create(box, material);
         childBox->set_position(vec3(0,0,-10));
         shared_ptr<Object3D> childBox_2 = TriMesh::create(box, material);
@@ -112,7 +110,7 @@ void initializeGL() {
         scene->add(t);
     }
     {
-        vec3 v[]={vec3(0,-10,0), vec3(0,0,0), vec3(0,10,0)};
+        vec3 v[]={vec3(0,-30,0), vec3(0,0,0), vec3(0,30,0)};
         auto vbo = VertexBuffer::create(v, sizeof(v), sizeof(vec3));
         auto g = Geometry::create();
         g ->add_attribute("position",vbo);
@@ -126,7 +124,7 @@ void initializeGL() {
 
     perspectiveCamera = Camera::createPerspective();
     perspectiveCamera->lookat(glm::vec3(0,0,0), glm::vec3(0,0,-1), glm::vec3(0,1,0));
-    perspectiveCamera->perspective( atan(100.0/100.0)*2, double(WinX)/double(WinY), 1, 500.0);
+    perspectiveCamera->perspective( atan(100.0/100.0)*2, double(WinX)/double(WinY), 1.0, 500.0);
 }
 
 
@@ -154,7 +152,10 @@ void keyboard(unsigned char ch, int x, int y) {
         float x = sin(t), z = -cos(t);
         perspectiveCamera->lookat(vec3(0,0,0), vec3(x, 0, z), vec3(0,1,0));
         t += 0.03;
+    }else if (ch =='e') {
+        PrintGLError(glGetError());
     }
+
     glutPostRedisplay();
 }
 

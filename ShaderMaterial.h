@@ -13,7 +13,7 @@ class ShaderMaterial {
     friend TriMesh;
     friend Line;
 public:
-    void set_texture(const std::string &name, std::shared_ptr<Texture> & texture);
+    void set_texture(const std::string &name, std::shared_ptr<Texture> texture);
     static std::shared_ptr<ShaderMaterial> create(std::shared_ptr<Shader> & shader);
     std::shared_ptr<Texture> get_texture(const std::string & name);
     ~ShaderMaterial();
@@ -46,7 +46,7 @@ public:
         }
     }
     void set_depthTest(bool depthTest){
-        if (depthTest) {
+        if (!depthTest) {
             m_depthTest = []() {
                 glDisable(GL_DEPTH_TEST);
             };

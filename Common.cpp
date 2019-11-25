@@ -29,7 +29,22 @@ int SizeOfTextureDataType(TextureDataType type) {
 
 
 
-
+void PrintGLError(int error) {
+#define item(x) case x: cout << #x << endl; break
+    switch (error){
+        item(GL_NO_ERROR);
+        item(GL_INVALID_ENUM);
+        item(GL_INVALID_VALUE);
+        item(GL_INVALID_OPERATION);
+        item(GL_INVALID_FRAMEBUFFER_OPERATION);
+        item(GL_OUT_OF_MEMORY);
+        item(GL_STACK_UNDERFLOW);
+        item(GL_STACK_OVERFLOW);
+        default:
+            cout <<"unknown error" << endl;
+    }
+#undef item
+}
 
 
 
