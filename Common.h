@@ -89,6 +89,7 @@ class Uniform;
 class UniformValue;
 class Object3D;
 class TriMesh;
+class Point;
 class Camera;
 class PerspectiveCamera;
 class Texture;

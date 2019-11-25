@@ -40,6 +40,7 @@ public:
     }
     bool get_visible()const{return m_visible;}
     static std::shared_ptr<Object3D> create();
+    ~Object3D(){}
 protected:
     void update_modelMatrix();
     virtual void draw(const Camera *camera, const glm::mat4 & parentModelMat = glm::mat4(1.0)){}

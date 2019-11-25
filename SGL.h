@@ -16,5 +16,6 @@
 #include "Camera.h"
 #include "Scene.h"
 #include "Line.h"
+#include "Point.h"
 
 #endif //SGLRENDER_SGL_H

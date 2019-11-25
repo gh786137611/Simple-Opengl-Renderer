@@ -12,6 +12,7 @@ SGL_BEGIN
 class ShaderMaterial {
     friend TriMesh;
     friend Line;
+    friend Point;
 public:
     void set_texture(const std::string &name, std::shared_ptr<Texture> texture);
     static std::shared_ptr<ShaderMaterial> create(std::shared_ptr<Shader> & shader);

@@ -72,31 +72,33 @@ void initializeGL() {
     glClearColor(0.6,0.0,0.6,1.0);
 
     shared_ptr<Geometry> box = Geometry::create_unit_box();
-    shared_ptr<Shader> shader = Shader::create(vert, frag);
-    shared_ptr<ShaderMaterial> material = ShaderMaterial::create(shader);
-
-    void *data[6];
-    string direction[] = {"r","l", "u", "d", "f", "b"};
-    int x, y, ch;
-    for (int i = 0; i<6; i++){
-        const string file = string("../resouces/skybox/") + direction[i] + ".jpg";
-        data[i] = stbi_load(file.c_str(), &x, &y, &ch,3);
-    }
-    shared_ptr<TextureCube> textureCube = Texture::create_cube_texture();
-    textureCube->set_data(PixelFormat::RGBA, x, y, PixelFormat::RGB, TextureDataType::UBYTE, data);
-    textureCube->generate_mipmap();
-    textureCube->set_filter(TextureParameter::LinearMipMapLinear, TextureParameter::Linear);
-    textureCube->set_wrap(TextureParameter::ClampToEdge, TextureParameter::ClampToEdge,TextureParameter::ClampToEdge);
-
-    for (auto e:data) stbi_image_free(e);
-    material->set_texture("cube", textureCube);
-    material->set_value("mask", vec4(1,0,1,1));
-    shared_ptr<Object3D> mesh = TriMesh::create(box, material);
-    float scale = 300.0;
-    mesh->set_scale(scale,scale,scale);
 
     scene = Scene::create();
-    scene->add(mesh);
+    {
+        shared_ptr<Shader> shader = Shader::create(vert, frag);
+        shared_ptr<ShaderMaterial> material = ShaderMaterial::create(shader);
+
+        void *data[6];
+        string direction[] = {"r","l", "u", "d", "f", "b"};
+        int x, y, ch;
+        for (int i = 0; i<6; i++){
+            const string file = string("../resouces/skybox/") + direction[i] + ".jpg";
+            data[i] = stbi_load(file.c_str(), &x, &y, &ch,3);
+        }
+        shared_ptr<TextureCube> textureCube = Texture::create_cube_texture();
+        textureCube->set_data(PixelFormat::RGBA, x, y, PixelFormat::RGB, TextureDataType::UBYTE, data);
+        textureCube->generate_mipmap();
+        textureCube->set_filter(TextureParameter::LinearMipMapLinear, TextureParameter::Linear);
+        textureCube->set_wrap(TextureParameter::ClampToEdge, TextureParameter::ClampToEdge,TextureParameter::ClampToEdge);
+
+        for (auto e:data) stbi_image_free(e);
+        material->set_texture("cube", textureCube);
+        material->set_value("mask", vec4(1,0,1,1));
+        shared_ptr<Object3D> mesh = TriMesh::create(box, material);
+        float scale = 300.0;
+        mesh->set_scale(scale,scale,scale);
+        scene->add(mesh);
+    }
     {
         auto shader = Shader::create(vert2,frag2);
         auto material = ShaderMaterial::create(shader);
@@ -119,7 +121,31 @@ void initializeGL() {
         m->set_value("u_color",vec3(0,1,0));
         auto line = Line::create(g, m);
         line->set_position(vec3(0,0,-100));
+        line->set_line_width(2.f);
         scene->add(line);
+    }
+
+    {
+        vector<vec3> v;
+        v.reserve((100 * 100 * 100));
+        float h = 20 / 5.f;
+        for (float x = -10; x <10; x+=h){
+            for (float y = -10; y <10; y+=h){
+                for (float z = -10; z <10; z+=h){
+                    v.push_back(vec3(x,y,z));
+                }
+            }
+        }
+        auto vbo = VertexBuffer::create(v.data(), sizeof(vec3)*v.size(), sizeof(vec3));
+        auto g = Geometry::create();
+        g->add_attribute("position",vbo);
+        auto shader = Shader::create(vert3,frag3);
+        auto m = ShaderMaterial::create(shader);
+        m->set_value("u_color",vec3(0,1,1));
+        auto points = Point::create(g, m);
+        points->set_position(vec3(0,0,-50));
+        scene->add(points);
+        points->set_size(2.f);
     }
 
     perspectiveCamera = Camera::createPerspective();
@@ -146,13 +172,19 @@ void resizeGL(int w, int h) {
 
 
 void keyboard(unsigned char ch, int x, int y) {
+    static float  t = 0.;
     if (ch =='a') {
-        static float  t = 0.;
+        t += 0.03;
         mat4 r = glm::rotate(glm::mat4(1.0f), t,glm::vec3(0.0f, 1.0f, 0.0f));
         float x = sin(t), z = -cos(t);
         perspectiveCamera->lookat(vec3(0,0,0), vec3(x, 0, z), vec3(0,1,0));
-        t += 0.03;
-    }else if (ch =='e') {
+    }else if (ch == 'd'){
+        t -= 0.03;
+        mat4 r = glm::rotate(glm::mat4(1.0f), t,glm::vec3(0.0f, 1.0f, 0.0f));
+        float x = sin(t), z = -cos(t);
+        perspectiveCamera->lookat(vec3(0,0,0), vec3(x, 0, z), vec3(0,1,0));
+    }
+    else if (ch =='e') {
         PrintGLError(glGetError());
     }
 
