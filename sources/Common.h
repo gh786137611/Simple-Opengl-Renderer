@@ -93,6 +93,7 @@ class Object3D;
 class TriMesh;
 class Point;
 class Camera;
+class OrthoCamera;
 class PerspectiveCamera;
 class Texture;
 class Texture2D;

@@ -12,6 +12,7 @@ using  namespace glm;
 using namespace SGL;
 Ptr<Scene> scene;
 Ptr<PerspectiveCamera> perspectiveCamera;
+Ptr<OrthoCamera> orthoCamera;
 int WinX = 512, WinY = 512;
 
 const string vert = R"(
@@ -152,6 +153,11 @@ void initializeGL() {
     perspectiveCamera = Camera::createPerspective();
     perspectiveCamera->lookat(glm::vec3(0,0,0), glm::vec3(0,0,-1), glm::vec3(0,1,0));
     perspectiveCamera->perspective( atan(100.0/100.0)*2, double(WinX)/double(WinY), 1.0, 500.0);
+
+
+    orthoCamera = Camera::createOrtho();
+    orthoCamera->lookat(glm::vec3(0,0,0), glm::vec3(0,0,-1), glm::vec3(0,1,0));
+    orthoCamera->ortho(-100,100, -100,100, 1.f, 1000.f);
 }
 
 

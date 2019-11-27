@@ -16,6 +16,14 @@ Ptr<PerspectiveCamera> Camera::createPerspective() {
     return camera;
 }
 
+Ptr<OrthoCamera> Camera::createOrtho() {
+    auto camera = Ptr<OrthoCamera>(new OrthoCamera);
+    camera->lookat(glm::vec3(0.0, 0.0, 0.0),
+                   glm::vec3(0.0, 0.0, -1.0),
+                   glm::vec3(0.0, 1.0, 0.0));
+    camera->ortho(-1,1,-1,1,1.f, 100.f);
+    return camera;
+}
 
 
 
