@@ -12,7 +12,8 @@ SGL_BEGIN
 
 class TriMesh: public Object3D {
 public:
-    static Ptr<TriMesh> create(Ptr<Geometry> & geometry, Ptr<ShaderMaterial>& material);
+    static Ptr<TriMesh> create(Ptr<Geometry> & geometry, Ptr<ShaderMaterial>& material,
+            const std::string &name="");
     Ptr<Geometry> & geometry() {
         return m_geometry;
     }

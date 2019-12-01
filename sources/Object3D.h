@@ -18,6 +18,12 @@ public:
         update_modelMatrix();
     }
     const glm::vec3 &get_scale()const{return m_scale;}
+    void set_name(const std::string & name) {
+        m_name = name;
+    }
+    const std::string & get_name()const{
+        return m_name;
+    }
     void set_position(const glm::vec3 & pos){
         m_position = pos;
         update_modelMatrix();
@@ -33,12 +39,14 @@ public:
         return m_rotation;
     }
     void add_child(Ptr<Object3D> & child) {
-        m_children.push_back(child);
+        if(child)
+            m_children.push_back(child);
     }
     void set_visible(bool visible) {
         m_visible = visible;
     }
     bool get_visible()const{return m_visible;}
+    Ptr<Object3D> remove_child(const std::string & name);
     static Ptr<Object3D> create();
     ~Object3D(){}
 protected:
@@ -61,6 +69,7 @@ protected:
     Ptr<Geometry> m_geometry;
     Ptr<ShaderMaterial> m_material;
     std::list<Ptr<Object3D>> m_children;
+    std::string m_name;
     bool m_visible;
 };
 

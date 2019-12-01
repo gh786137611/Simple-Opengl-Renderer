@@ -17,8 +17,11 @@ Line::Line(Ptr<SGL::Geometry> geometry, Ptr<SGL::ShaderMaterial> material) {
     set_line_width(1.0f);
 }
 
-Ptr<Line> Line::create(Ptr<Geometry> geometry, Ptr<ShaderMaterial> material) {
-    return Ptr<Line>{new Line{geometry, material}};
+Ptr<Line> Line::create(Ptr<Geometry> geometry, Ptr<ShaderMaterial> material,
+        const std::string & name) {
+    auto ptr =  Ptr<Line>{new Line{geometry, material}};
+    ptr->m_name = name;
+    return ptr;
 }
 
 void Line::draw(const SGL::Camera *camera, const glm::mat4 &parentModelMat) {

@@ -21,8 +21,11 @@ void Point::draw(const SGL::Camera *camera, const glm::mat4 &parentModelMat) {
     glDrawArrays(GL_POINTS, 0, count);
 }
 
-Ptr<Point> Point::create(Ptr<SGL::Geometry> geometry, Ptr<SGL::ShaderMaterial> material) {
-    return  Ptr<Point>(new Point(geometry, material));
+Ptr<Point> Point::create(Ptr<SGL::Geometry> geometry, Ptr<SGL::ShaderMaterial> material,
+        const std::string & name) {
+    auto ptr =  Ptr<Point>(new Point(geometry, material));
+    ptr->m_name = name;
+    return ptr;
 }
 
 void Point::set_size(float r) {

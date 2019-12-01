@@ -29,4 +29,26 @@ void Scene::draw_obj(Ptr<Object3D> & obj, const Camera * camera, const glm::mat4
     }
 }
 
+Ptr<Object3D> Scene::remove(const std::string &name) {
+    auto it = m_children.begin();
+    for (; it !=m_children.end(); ++it){
+        if ((*it)->m_name == name) {
+            break;
+        }
+    }
+    if (it != m_children.end()){
+        Ptr<Object3D> ptr = *it;
+        m_children.erase(it);
+        return ptr;
+    }else{
+        for (Ptr<Object3D> & child : m_children){
+            auto t = child->remove_child(name);
+            if (t) {
+                return t;
+            }
+        }
+    }
+
+    return Ptr<Object3D>{};
+}
 SGL_END

@@ -12,7 +12,8 @@ SGL_BEGIN
 
 class Point : public Object3D {
 public:
-    static Ptr<Point> create(Ptr<SGL::Geometry> geometry, Ptr<SGL::ShaderMaterial> material);
+    static Ptr<Point> create(Ptr<SGL::Geometry> geometry, Ptr<SGL::ShaderMaterial> material,
+            const std::string & name="");
     void set_size(float r);
     void set_smooth(bool smooth);
 protected:

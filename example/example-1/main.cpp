@@ -16,7 +16,7 @@ Ptr<OrthoCamera> orthoCamera;
 int WinX = 512, WinY = 512;
 
 const string vert = R"(
-#version 330 core
+#version 130
 in vec3 position;
 uniform mat4 modelviewMatrix;
 uniform mat4 projectionMatrix;
@@ -111,6 +111,7 @@ void initializeGL() {
         childBox_2->set_position(vec3(0,2,0));
         Ptr<Object3D> t(childBox);
         t->add_child(childBox_2);
+        childBox_2->set_name("box-2");
         scene->add(t);
     }
     {
@@ -148,6 +149,7 @@ void initializeGL() {
         points->set_position(vec3(0,0,-50));
         scene->add(points);
         points->set_size(2.f);
+        points->set_name("points");
     }
 
     perspectiveCamera = Camera::createPerspective();
@@ -193,6 +195,11 @@ void keyboard(unsigned char ch, int x, int y) {
     }
     else if (ch =='e') {
         PrintGLError(glGetError());
+    }else if (ch =='r') {
+        Ptr<Object3D> ptr = scene->remove("box-2");
+        if (ptr) {
+            cout << ptr->get_name()<< endl;
+        }
     }
 
     glutPostRedisplay();

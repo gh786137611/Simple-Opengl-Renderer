@@ -12,8 +12,10 @@ public:
     void draw(const Camera * camera);
     static Ptr<Scene> create();
     void add(Ptr<Object3D> obj){
-        m_children.push_back(obj);
+        if (obj)
+            m_children.push_back(obj);
     }
+    Ptr<Object3D> remove(const std::string & name);
 
 private:
     void draw_obj(Ptr<Object3D> & obj, const Camera * camera, const glm::mat4 & mat);

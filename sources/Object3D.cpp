@@ -21,4 +21,25 @@ Ptr<Object3D> Object3D::create() {
     return Ptr<Object3D>(new Object3D);
 }
 
+Ptr<Object3D> Object3D::remove_child(const std::string &name) {
+    auto it = m_children.begin();
+    for (; it != m_children.end(); ++it) {
+        if ((*it)->m_name == name) {
+            break;
+        }
+    }
+    if (it != m_children.end()) {
+        Ptr<Object3D> ptr = *it;
+        m_children.erase(it);
+        return ptr;
+    }else{
+        for (auto & child : m_children){
+            auto t = child->remove_child(name);
+            if (t) {
+                return t;
+            }
+        }
+    }
+    return Ptr<Object3D>{};
+}
 SGL_END

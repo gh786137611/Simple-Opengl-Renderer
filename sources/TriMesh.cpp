@@ -38,8 +38,11 @@ void TriMesh::draw(const Camera *camera, const glm::mat4 & parentModelMat) {
 }
 
 Ptr<TriMesh> TriMesh::create(Ptr<Geometry> &geometry,
-                                         Ptr<ShaderMaterial> &material) {
-    return Ptr<TriMesh>(new TriMesh(geometry, material));
+                                         Ptr<ShaderMaterial> &material,
+                                         const std::string & name) {
+    auto ptr=  Ptr<TriMesh>(new TriMesh(geometry, material));
+    ptr->m_name = name;
+    return ptr;
 }
 
 void TriMesh::state_switch() {
