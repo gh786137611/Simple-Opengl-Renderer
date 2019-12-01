@@ -10,7 +10,7 @@ GLM(https://github.com/g-truc/glm) is used for matrix calculation.
 + All the GPU Buffers are allocated at their first usage in rendering.
 
 ## Usage
-There are simple examples. I take freeglut as window system in my examples. To use SGLRenderer their are three main steps:
+There are simple examples. I take freeglut as window system in my examples. To use SGLRenderer there are three main steps:
 1. Writing you glsl-based shader
 2. initialize Geometry and ShaderMaterial to create a 3D object
 3. add the 3D object to a Scene.
