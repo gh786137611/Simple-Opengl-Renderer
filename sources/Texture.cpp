@@ -8,13 +8,10 @@
 
 SGL_BEGIN
 
-Ptr<Texture2D> Texture::create_2D_texture() {
+Ptr<Texture2D> Texture2D::create() {
     return Ptr<Texture2D>(new Texture2D{});
 }
 
-Ptr<TextureCube> Texture::create_cube_texture() {
-    return Ptr<TextureCube>(new TextureCube{});
-}
 
 Texture2D::~Texture2D() {
     if (m_handle) {
@@ -58,6 +55,10 @@ void Texture2D::bind(Uniform *u) {
         m_needsGenerateMipmap = false;
     }
     glUniform1i(u->m_location, u->m_textureUnit);
+}
+
+Ptr<TextureCube> TextureCube::create(){
+    return Ptr<TextureCube>(new TextureCube{});
 }
 
 void TextureCube::bind(Uniform *u) {

@@ -7,16 +7,9 @@
 
 SGL_BEGIN
 
-Ptr<PerspectiveCamera> Camera::createPerspective() {
-    auto camera = Ptr<PerspectiveCamera>(new PerspectiveCamera{});
-    camera->lookat(glm::vec3(0.0, 0.0, 0.0),
-                glm::vec3(0.0, 0.0, -1.0),
-                glm::vec3(0.0, 1.0, 0.0));
-    camera->perspective(0.002, 1.0, 0.1, 1000.0);
-    return camera;
-}
 
-Ptr<OrthoCamera> Camera::createOrtho() {
+
+Ptr<OrthoCamera> OrthoCamera::create() {
     auto camera = Ptr<OrthoCamera>(new OrthoCamera);
     camera->lookat(glm::vec3(0.0, 0.0, 0.0),
                    glm::vec3(0.0, 0.0, -1.0),
@@ -25,7 +18,14 @@ Ptr<OrthoCamera> Camera::createOrtho() {
     return camera;
 }
 
-
+Ptr<PerspectiveCamera> PerspectiveCamera::create() {
+    auto camera = Ptr<PerspectiveCamera>(new PerspectiveCamera{});
+    camera->lookat(glm::vec3(0.0, 0.0, 0.0),
+                   glm::vec3(0.0, 0.0, -1.0),
+                   glm::vec3(0.0, 1.0, 0.0));
+    camera->perspective(0.002, 1.0, 0.1, 1000.0);
+    return camera;
+}
 
 
 

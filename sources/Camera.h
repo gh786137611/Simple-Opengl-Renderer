@@ -25,8 +25,6 @@ public:
         return m_viewMatrix;
     }
 
-    static Ptr<PerspectiveCamera> createPerspective();
-    static Ptr<OrthoCamera> createOrtho();
     const glm::vec3 & position()const {
         return m_position;
     }
@@ -74,6 +72,8 @@ public:
         update_projectionMatrix();
     }
 
+    static Ptr<PerspectiveCamera> create();
+
 private:
     PerspectiveCamera(){}
     void update_projectionMatrix() {
@@ -94,6 +94,8 @@ public:
     void ortho(float left, float right, float bottom, float top, float near, float far) {
         m_projectionMatrix = glm::ortho(left, right, bottom, top, near,far);
     }
+
+    static Ptr<OrthoCamera> create();
 private:
     OrthoCamera(){}
 };

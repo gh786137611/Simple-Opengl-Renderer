@@ -87,7 +87,7 @@ void initializeGL() {
             data[i] = stbi_load(file.c_str(), &x, &y, &ch,3);
             assert(data[i]);
         }
-        Ptr<TextureCube> textureCube = Texture::create_cube_texture();
+        Ptr<TextureCube> textureCube = TextureCube::create();
         textureCube->set_data(PixelFormat::RGBA, x, y, PixelFormat::RGB, TextureDataType::UBYTE, data);
         textureCube->generate_mipmap();
         textureCube->set_filter(TextureParameter::LinearMipMapLinear, TextureParameter::Linear);
@@ -152,12 +152,12 @@ void initializeGL() {
         points->set_name("points");
     }
 
-    perspectiveCamera = Camera::createPerspective();
+    perspectiveCamera = PerspectiveCamera::create();
     perspectiveCamera->lookat(glm::vec3(0,0,0), glm::vec3(0,0,-1), glm::vec3(0,1,0));
     perspectiveCamera->perspective( atan(100.0/100.0)*2, double(WinX)/double(WinY), 1.0, 500.0);
 
 
-    orthoCamera = Camera::createOrtho();
+    orthoCamera = OrthoCamera::create();
     orthoCamera->lookat(glm::vec3(0,0,0), glm::vec3(0,0,-1), glm::vec3(0,1,0));
     orthoCamera->ortho(-100,100, -100,100, 1.f, 1000.f);
 }

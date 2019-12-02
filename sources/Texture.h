@@ -28,8 +28,6 @@ public:
     void generate_mipmap() {
         m_needsGenerateMipmap = true;
     }
-    static Ptr<Texture2D> create_2D_texture();
-    static Ptr<TextureCube> create_cube_texture();
 
 protected:
     Texture(){
@@ -62,7 +60,7 @@ class Texture2D: public Texture {
     };
 public:
     ~Texture2D() override ;
-
+    static Ptr<Texture2D> create();
     void set_data(PixelFormat internalFormat, int width, int height, PixelFormat format, TextureDataType type, const void *data) {
         m_pendingData.level = 0;
         m_pendingData.internal = internalFormat;
@@ -112,6 +110,7 @@ class TextureCube: public Texture {
     };
 public:
     ~TextureCube()override ;
+    static Ptr<TextureCube> create();
     void set_data(PixelFormat internalFormat, int width, int height, PixelFormat format, TextureDataType type, const void * const*data) {
         m_pendingData.level = 0;
         m_pendingData.internal = internalFormat;
