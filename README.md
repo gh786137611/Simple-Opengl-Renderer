@@ -18,11 +18,11 @@ There are simple examples. I take freeglut as window system in my examples. To u
 You must combine the SGLRenderer code with your window system. I think the combination is easy, 
 which only involves initialization and draw code block in Qt and freeglut.
 ## shader source text specification
-You must name the vertex position attribute in vertex shader as position as following code shown
+You must name the vertex position attribute in vertex shader as position as the following code shows
 ```C++
 in vec3 position;
 ```
-Besides projection matrix and model-view matrix must be named as projectionMatrix and modelviewMatrix respectively.
+Besides, projection matrix and model-view matrix must be named as projectionMatrix and modelviewMatrix respectively.
 ```C++
 uniform mat4 projectionMatrix;
 uniform mat4 modelviewMatrix;
