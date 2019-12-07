@@ -31,6 +31,7 @@ Projection matrix and model-view matrix will be provided by camera, so you do no
 
 
 # Example
+The complete source code of following examples can be found in the example directory.
 ## Point Rendering
 This demostrates rendering 3 colorful points. The shader source text is simple.
 ```C++
@@ -102,6 +103,7 @@ Then you can see three colorful points on screen. Your points can be cicle dots.
 
 ![image](points.png)
 
+
 ## Line Rendering
 This example shows two colorful lines. The shader source text reads
 ```C++
@@ -172,4 +174,79 @@ And render the scene
 
 Then we get two orthogonal lines
 
-![image](lines.png)
+![lines](lines.png)
+
+
+## Triangle
+
+This example shows the usage of TriMesh. TriMesh is used to render triangles. The data of triangle can be stored as vertices or as vertices and indices.
+
+Shader source:
+
+```C++
+static const string vs = R"(
+#version 130
+in vec3 position;
+in vec3 color;
+uniform mat4 projectionMatrix, modelviewMatrix;
+out vec3 u_color;
+void main() {
+    gl_Position = projectionMatrix * modelviewMatrix * vec4(position, 1.0);
+    u_color = color;
+}
+)";
+static const string fs = R"(
+#version 130
+in vec3 u_color;
+void main(){
+    gl_FragColor = vec4(u_color,1.0);
+}
+)";
+```
+
+Initialization of TriMesh:
+
+```C++
+Ptr<TriMesh> triangle;
+    {
+        vec3 vertex[]={
+                vec3(0., 0, -100), vec3(0.5, 0, -100), vec3(0.5, 0.5, -100)
+        };
+        vec3 color[]={
+                vec3(1,0,0), vec3(0,1,0), vec3(0,0,1)
+        };
+        Ptr<VertexBuffer> vbo = VertexBuffer::create(vertex, sizeof(vertex), sizeof(vec3));
+        Ptr<VertexBuffer> cbo = VertexBuffer::create(color, sizeof(color), sizeof(vec3));
+        Ptr<Geometry> geometry = Geometry::create();
+        geometry->add_attribute("position", vbo);
+        geometry->add_attribute("color", cbo);
+
+        Ptr<Shader> shader = Shader::create(vs, fs);
+        Ptr<ShaderMaterial> material = ShaderMaterial::create(shader);
+        triangle = TriMesh::create(geometry, material);
+    }
+```
+Set up scene and camera:
+
+```C++
+    scene = Scene::create();
+    {
+        scene->add(triangle);
+    }
+
+    camera = PerspectiveCamera::create();
+    {
+        camera->lookat(vec3(0,0,0),vec3(0,0,-1),vec3(0,1,0));
+        camera->perspective(atan(1.0/100.0)*2.0, 1.0, 1.0, 1000.0);
+    }
+```
+
+And Render the scene:
+
+```C++
+scene->draw(camera.get());
+```
+
+The rendering result shows:
+
+![triangle](triangles.png)
