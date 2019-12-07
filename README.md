@@ -250,3 +250,95 @@ scene->draw(camera.get());
 The rendering result shows:
 
 ![triangle](triangles.png)
+
+## Texture2D
+
+This example shows how to use texture map with Texture2D.
+The shader reads
+
+```C+++
+static const string vs = R"(
+#version 130
+in vec3 position;
+in vec2 uv;
+uniform mat4 projectionMatrix, modelviewMatrix;
+out vec2 u_uv;
+void main() {
+    gl_Position = projectionMatrix * modelviewMatrix * vec4(position, 1.0);
+    u_uv = vec2(uv.x, 1.0 - uv.y);
+}
+)";
+static const string fs = R"(
+#version 130
+in vec2 u_uv;
+uniform sampler2D tex;
+void main(){
+    gl_FragColor = texture(tex, u_uv);
+}
+)";
+```
+
+Initialize a rectangle and map a texture to this rectangle by the uv coordinates. The initialization of Texture2D is simple as the code block of create-texture-2d shows
+
+```C++
+Ptr<TriMesh> rect;
+    {
+        vec3 vertex[]={
+                vec3(0., 0, 0), vec3(0.5, 0, 0), vec3(0.5, 0.5, 0), vec3(0., 0.5, 0)
+        };
+        vec2 uv[]={
+                vec2(0,0),vec2(1,0),vec2(1,1),vec2(0,1)
+        };
+        unsigned indices[]={0,1,2, 0, 2,3};
+        Ptr<VertexBuffer> vbo = VertexBuffer::create(vertex, sizeof(vertex), sizeof(vec3));
+        Ptr<VertexBuffer> uvVBO = VertexBuffer::create(uv, sizeof(uv), sizeof(vec2));
+        Ptr<IndexBuffer> ibo = IndexBuffer::create(indices, 6);
+        Ptr<Geometry> geometry = Geometry::create();
+        geometry->add_attribute("position", vbo);
+        geometry->add_attribute("uv", uvVBO);
+        geometry->set_indices(ibo);
+
+        Ptr<Shader> shader = Shader::create(vs, fs);
+        Ptr<ShaderMaterial> material = ShaderMaterial::create(shader);
+        // create-texture-2d
+        {
+            int x, y, ch;
+            unsigned char *image = stbi_load("../../resouces/skybox/b.jpg", &x, &y, &ch, 3);
+            assert(image);
+            Ptr<Texture2D> tex2d = Texture2D::create();
+            tex2d->set_data(PixelFormat::RGBA,x, y, PixelFormat::RGB, TextureDataType::UBYTE, image);
+            stbi_image_free(image);
+            material->set_texture("tex", tex2d);
+        }
+        rect = TriMesh::create(geometry, material);
+        rect->set_position(vec3(0,0,-100));
+        rect->set_name("rect");
+        // rect->set_cull_face(Face::Back);
+    }
+```
+
+Like the previous example, set up a scene and camera
+
+```C++
+    scene = Scene::create();
+    {
+        scene->add(rect);
+    }
+
+    camera = PerspectiveCamera::create();
+    {
+        camera->lookat(vec3(0,0,0),vec3(0,0,-1),vec3(0,1,0));
+        camera->perspective(atan(1.0/100.0)*2.0, 1.0, 1.0, 1000.0);
+    }
+```
+Call the draw method of scene
+
+```C++
+scene->draw(camera.get());
+```
+
+The rendering result shows a picture
+
+![tex2d](tex2d.png)
+
+
