@@ -126,6 +126,7 @@ void main(){
 ```
 
 The initialization of 3D object Line has a routine similar to Point.
+
 ```C++
 Ptr<Line> twoLines;
     {
@@ -149,6 +150,7 @@ Ptr<Line> twoLines;
 ```
 
  Add the line instances to a scene and set up a perspective camera.
+ 
 ```C++
      scene = Scene::create();
     {
@@ -161,10 +163,13 @@ Ptr<Line> twoLines;
         camera->perspective(atan(1.0/100.0)*2.0, 1.0, 1.0, 1000.0);
     }
 ```
-    And render the scene
+
+And render the scene
+
 ```C++
         scene->draw(camera.get());
 ```
-The we get two orthogonal lines
+
+Then we get two orthogonal lines
 
 ![image](lines.png)
