@@ -70,7 +70,11 @@ void ShaderMaterial::bind(Ptr<Geometry> &g) {
     bind_uniforms();
     for (Attrib &a : m_shader->m_attribs) {
         Ptr<VertexBuffer> vbo = g->get_attribute(a.m_name);
-        vbo->bind(&a);
+        if(! vbo) {
+            cout <<"attribute " << a.m_name << " is not provided" << endl;
+        }else{
+            vbo->bind(&a);
+        }
     }
 }
 

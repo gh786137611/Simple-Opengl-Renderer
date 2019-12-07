@@ -42,4 +42,24 @@ Ptr<Object3D> Object3D::remove_child(const std::string &name) {
     }
     return Ptr<Object3D>{};
 }
+
+Ptr<Object3D> Object3D::find(const std::string &name) {
+    auto it = m_children.begin();
+    for (; it != m_children.end(); ++it) {
+        if ((*it)->m_name == name) {
+            break;
+        }
+    }
+    if (it != m_children.end()) {
+        return *it;
+    }else{
+        for (auto & child : m_children){
+            auto t = child->find(name);
+            if (t) {
+                return t;
+            }
+        }
+    }
+    return Ptr<Object3D>{};
+}
 SGL_END

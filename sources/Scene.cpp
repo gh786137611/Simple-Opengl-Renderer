@@ -51,4 +51,25 @@ Ptr<Object3D> Scene::remove(const std::string &name) {
 
     return Ptr<Object3D>{};
 }
+
+Ptr<Object3D> Scene::find(const std::string &name) {
+    auto it = m_children.begin();
+    for (; it !=m_children.end(); ++it){
+        if ((*it)->m_name == name) {
+            break;
+        }
+    }
+    if (it != m_children.end()){
+        return *it;
+    }else{
+        for (Ptr<Object3D> & child : m_children){
+            auto t = child->find(name);
+            if (t) {
+                return t;
+            }
+        }
+    }
+
+    return Ptr<Object3D>{};
+}
 SGL_END

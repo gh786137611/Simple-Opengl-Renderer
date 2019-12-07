@@ -46,6 +46,7 @@ public:
         m_visible = visible;
     }
     bool get_visible()const{return m_visible;}
+    Ptr<Object3D> find(const std::string & name);
     Ptr<Object3D> remove_child(const std::string & name);
     static Ptr<Object3D> create();
     ~Object3D(){}
