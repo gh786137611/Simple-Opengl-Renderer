@@ -38,6 +38,11 @@ public:
     const glm::mat4 & get_rotation()const{
         return m_rotation;
     }
+
+    const glm::mat4 & get_modelMatrix()const {
+        return m_modelMatrix;
+    }
+
     void add_child(Ptr<Object3D> & child) {
         if(child)
             m_children.push_back(child);

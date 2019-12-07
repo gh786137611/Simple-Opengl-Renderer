@@ -115,6 +115,7 @@ Ptr<Geometry> Geometry::create_unit_box() {
     Ptr<VertexBuffer> vbo = VertexBuffer::create(vertex, sizeof(vertex), sizeof(float)*3);
     Ptr<VertexBuffer> nbo = VertexBuffer::create(normal, sizeof(normal), sizeof(float)*3);
     g->add_attribute("position", vbo);
+    g->add_attribute("normal", nbo);
     return g;
 }
 
