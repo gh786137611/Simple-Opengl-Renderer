@@ -18,6 +18,8 @@ public:
     unsigned get_element_number(){
         return m_size / m_nPerVertex;
     }
+
+    void set_data(const void * data, size_t size, size_t nPerVertex);
 private:
     VertexBuffer(const void * data, size_t size, size_t nPerVertex);
     void bind(Attrib * a);

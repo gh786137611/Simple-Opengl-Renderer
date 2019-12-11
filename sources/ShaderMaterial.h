@@ -58,6 +58,10 @@ public:
             };
         }
     }
+
+    Ptr<Shader> & shader() {
+        return m_shader;
+    }
 protected:
     ShaderMaterial(Ptr<Shader>& shader);
     void bind(Ptr<Geometry> & g);

@@ -13,12 +13,14 @@ SGL_BEGIN
 
 void Point::draw(const SGL::Camera *camera, const glm::mat4 &parentModelMat) {
     glm::mat4 modelview = camera->viewMatrix() * parentModelMat * m_modelMatrix;
-    m_material->set_value("modelviewMatrix", modelview);
-    m_material->set_value("projectionMatrix", camera->projectionMatrix());
-    m_material->bind(m_geometry);
-    state_switch();
-    unsigned count = m_geometry->get_attribute("position")->get_element_number();
-    glDrawArrays(GL_POINTS, 0, count);
+    if (m_material && m_geometry) {
+        m_material->set_value("modelviewMatrix", modelview);
+        m_material->set_value("projectionMatrix", camera->projectionMatrix());
+        m_material->bind(m_geometry);
+        state_switch();
+        unsigned count = m_geometry->get_attribute("position")->get_element_number();
+        glDrawArrays(GL_POINTS, 0, count);
+    }
 }
 
 Ptr<Point> Point::create(Ptr<SGL::Geometry> geometry, Ptr<SGL::ShaderMaterial> material,

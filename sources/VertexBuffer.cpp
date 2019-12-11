@@ -16,6 +16,18 @@ VertexBuffer::VertexBuffer(const void *data, size_t size, size_t nPerVertex) {
     m_nPerVertex = nPerVertex;
 }
 
+void VertexBuffer::set_data(const void *data, size_t size, size_t nPerVertex) {
+    if (m_pendingData) {
+        delete[] m_pendingData;
+        m_pendingData = nullptr;
+    }
+    char * p  = new char[size];
+    memcpy(p, data, size);
+    m_pendingData = p;
+    m_size = size;
+    m_nPerVertex = nPerVertex;
+}
+
 void VertexBuffer::bind(Attrib * a)  {
     if (0 == m_handle) {
         glGenBuffers(1, &m_handle);

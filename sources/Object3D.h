@@ -50,6 +50,15 @@ public:
     void set_visible(bool visible) {
         m_visible = visible;
     }
+
+    Ptr<ShaderMaterial> & material() {
+        return m_material;
+    }
+
+    Ptr<Geometry> & geometry() {
+        return m_geometry;
+    }
+
     bool get_visible()const{return m_visible;}
     Ptr<Object3D> find(const std::string & name);
     Ptr<Object3D> remove_child(const std::string & name);

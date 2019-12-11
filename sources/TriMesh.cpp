@@ -24,16 +24,18 @@ TriMesh::TriMesh(Ptr<Geometry> &geometry, Ptr<ShaderMaterial> &material) {
 
 void TriMesh::draw(const Camera *camera, const glm::mat4 & parentModelMat) {
     glm::mat4 modelview = camera->viewMatrix() * parentModelMat * m_modelMatrix;
-    m_material->set_value("modelviewMatrix", modelview);
-    m_material->set_value("projectionMatrix", camera->projectionMatrix());
-    m_material->bind(m_geometry);
-    state_switch();
-    if (m_geometry->m_indices) {
-        m_geometry->m_indices->bind();
-        glDrawElements(GL_TRIANGLES, m_geometry->m_indices->m_size, GL_UNSIGNED_INT, nullptr);
-    }else{
-        unsigned count = m_geometry->get_attribute("position")->get_element_number();
-        glDrawArrays(GL_TRIANGLES, 0, count);
+    if (m_material && m_geometry) {
+        m_material->set_value("modelviewMatrix", modelview);
+        m_material->set_value("projectionMatrix", camera->projectionMatrix());
+        m_material->bind(m_geometry);
+        state_switch();
+        if (m_geometry->m_indices) {
+            m_geometry->m_indices->bind();
+            glDrawElements(GL_TRIANGLES, m_geometry->m_indices->m_size, GL_UNSIGNED_INT, nullptr);
+        }else{
+            unsigned count = m_geometry->get_attribute("position")->get_element_number();
+            glDrawArrays(GL_TRIANGLES, 0, count);
+        }
     }
 }
 
