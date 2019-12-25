@@ -24,6 +24,17 @@ Ptr<Line> Line::create(Ptr<Geometry> geometry, Ptr<ShaderMaterial> material,
     return ptr;
 }
 
+Ptr<Line> Line::create(const std::vector<glm::vec3> &vertex, const glm::vec3 &color, const std::string &name) {
+    Ptr<VertexBuffer> vbo = VertexBuffer::create(vertex.data(), sizeof(glm::vec3)*vertex.size(), sizeof(glm::vec3));
+    auto g = Geometry::create();
+    g -> add_attribute("position", vbo);
+    auto m = ShaderMaterial::create(color_shader);
+    m->set_value("color", color);
+    auto ptr =  Ptr<Line>{new Line{g, m}};
+    ptr->m_name = name;
+    return ptr;
+}
+
 void Line::draw(const SGL::Camera *camera, const glm::mat4 &parentModelMat) {
     glm::mat4 modelview = camera->viewMatrix() * parentModelMat * m_modelMatrix;
     if (m_material && m_geometry) {

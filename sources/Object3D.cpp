@@ -3,8 +3,32 @@
 //
 
 #include "Object3D.h"
+#include "Shader.h"
 
 SGL_BEGIN
+
+Ptr<Shader> Object3D::color_shader = Ptr<Shader> (
+        new Shader(
+                std::string(R"(
+#version 130
+in vec3 position;
+uniform mat4 projectionMatrix, modelviewMatrix;
+void main(){
+gl_Position = projectionMatrix * modelviewMatrix * vec4(position, 1.0);
+}
+)"
+                            ),
+                            std::string(R"(
+#version 130
+uniform vec3 color;
+void main(){
+gl_FragColor = vec4(color, 1.0);
+}
+)")
+                )
+        );
+
+
 void Object3D::update_modelMatrix(){
     m_modelMatrix = glm::mat4(1.0);
     m_modelMatrix[0][0] = m_scale[0];

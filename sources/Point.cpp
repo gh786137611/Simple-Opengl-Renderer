@@ -30,6 +30,17 @@ Ptr<Point> Point::create(Ptr<SGL::Geometry> geometry, Ptr<SGL::ShaderMaterial> m
     return ptr;
 }
 
+Ptr<Point> Point::create(const std::vector<glm::vec3> &vertex, const glm::vec3 &color, const std::string &name) {
+    Ptr<VertexBuffer> vbo = VertexBuffer::create(vertex.data(), sizeof(glm::vec3) * vertex.size(), sizeof(glm::vec3));
+    auto g = Geometry::create();
+    g->add_attribute("position", vbo);
+    auto m = ShaderMaterial::create(color_shader);
+    m->set_value("color", color);
+    auto ptr =  Ptr<Point>(new Point(g, m));
+    ptr->m_name = name;
+    return ptr;
+}
+
 void Point::set_size(float r) {
     m_pointSize = [=](){
         glPointSize(r);

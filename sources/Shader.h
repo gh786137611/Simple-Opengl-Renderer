@@ -9,6 +9,7 @@
 SGL_BEGIN
 
 class Shader {
+    friend Object3D;
     friend  ShaderMaterial;
 public:
     static Ptr<Shader> create(const std::string & vert, const std::string & frag);

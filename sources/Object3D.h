@@ -75,6 +75,9 @@ protected:
         m_visible = true;
     }
     virtual void state_switch(){}
+
+public:
+    static Ptr<Shader> color_shader;
 protected:
     glm::mat4 m_parentModelMatrix;
     glm::mat4 m_modelMatrix;
