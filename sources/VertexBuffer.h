@@ -6,6 +6,7 @@
 #define SGLRENDER_VERTEXBUFFER_H
 
 #include "Common.h"
+#include "DataBuffer.h"
 
 SGL_BEGIN
 
@@ -20,6 +21,7 @@ public:
     }
 
     void set_data(const void * data, size_t size, size_t nPerVertex);
+    void set_subdata(const void *data, size_t offset, size_t size);
 private:
     VertexBuffer(const void * data, size_t size, size_t nPerVertex);
     void bind(Attrib * a);
@@ -27,7 +29,8 @@ private:
     unsigned m_handle;
     unsigned m_size;
     size_t m_nPerVertex;
-    char * m_pendingData;
+    DataBuffer * m_pendingData;
+    std::list<DataBuffer*> m_pendingSubData;
 };
 
 

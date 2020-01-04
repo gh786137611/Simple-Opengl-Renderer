@@ -100,6 +100,7 @@ class Texture2D;
 class TextureCube;
 class Scene;
 class Line;
+class DataBuffer;
 using std::cout;
 using std::endl;
 SGL_END

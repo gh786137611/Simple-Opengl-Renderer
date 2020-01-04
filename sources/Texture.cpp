@@ -18,10 +18,13 @@ Texture2D::~Texture2D() {
         glDeleteTextures(1, &m_handle);
         m_handle = 0;
     }
-    if (m_pendingData.data) {
-        delete[] m_pendingData.data;
-        m_pendingData.data = nullptr;
-        m_pendingData.level = -1;
+    if (m_pendingData) {
+        delete m_pendingData;
+    }
+    m_pendingData = nullptr;
+
+    for (DataBuffer * d:m_pendingSubData){
+        delete d;
     }
 }
 
@@ -31,21 +34,24 @@ void Texture2D::bind(Uniform *u) {
         glGenTextures(1, &m_handle);
     }
     assert(m_handle);
-    if (m_pendingData.level < 0) {
-        glActiveTexture(GL_TEXTURE0 + u->m_textureUnit);
-        glBindTexture(GL_TEXTURE_2D, m_handle);
-    }else {
-        glActiveTexture(GL_TEXTURE0 + u->m_textureUnit);
-        glBindTexture(GL_TEXTURE_2D, m_handle);
-        glTexImage2D(GL_TEXTURE_2D, m_pendingData.level, int(m_pendingData.internal), m_pendingData.width, m_pendingData.height, 0,
-                     int(m_pendingData.external), int(m_pendingData.type), m_pendingData.data);
+    glActiveTexture(GL_TEXTURE0 + u->m_textureUnit);
 
-        m_pendingData.level = -1;
-        if (m_pendingData.data) {
-            delete[]m_pendingData.data;
-            m_pendingData.data = nullptr;
-        }
+    if(m_pendingData) {
+        m_pendingData->updateTo(GL_TEXTURE_2D, m_handle);
+        delete m_pendingData;
+        m_pendingData = nullptr;
     }
+
+    if (not m_pendingSubData.empty()) {
+        for (DataBuffer * b:m_pendingSubData) {
+            b->updateTo(GL_TEXTURE_2D, m_handle);
+            delete b;
+        }
+        m_pendingSubData.clear();
+    }
+
+
+    glBindTexture(GL_TEXTURE_2D, m_handle);
     if (m_needsUpdateParameter) {
         update_parameter();
         m_needsUpdateParameter = false;

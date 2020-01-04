@@ -6,6 +6,7 @@
 #define SGLRENDER_TEXTURE_H
 
 #include "Common.h"
+#include "DataBuffer.h"
 
 SGL_BEGIN
 
@@ -62,21 +63,19 @@ public:
     ~Texture2D() override ;
     static Ptr<Texture2D> create();
     void set_data(PixelFormat internalFormat, int width, int height, PixelFormat format, TextureDataType type, const void *data) {
-        m_pendingData.level = 0;
-        m_pendingData.internal = internalFormat;
-        m_pendingData.external = format;
-        m_pendingData.width = width;
-        m_pendingData.height = height;
-        m_pendingData.type = type;
-        if (m_pendingData.data) {
-            delete[] m_pendingData.data;
-            m_pendingData.data = nullptr;
+        if (m_pendingData) {
+            delete m_pendingData;
+            m_pendingData = nullptr;
         }
         if (data) {
-            int len = width * height * ChannelOfPixelFormat(format) * SizeOfTextureDataType(type);
-            m_pendingData.data = new char[len];
-            memcpy(m_pendingData.data, data, len);
+            m_pendingData = new Tex2DDataCopyBuffer(internalFormat, width, height, format, type, data);
         }
+    }
+
+    void set_subdata(int xoffset, int yoffset,
+                     int width, int height, PixelFormat format, TextureDataType type, const void *data) {
+        DataBuffer * b = new Tex2DSubDataCopyBuffer(xoffset, yoffset, width, height, format, type, data);
+        m_pendingSubData.push_back(b);
     }
 
 private:
@@ -90,12 +89,12 @@ private:
     void bind(Uniform *u) override;
 
     Texture2D(){
-        m_pendingData.data = nullptr;
-        m_pendingData.level = -1;
+        m_pendingData = nullptr;
         m_handle = 0;
     }
 private:
-    DataTag m_pendingData;
+    DataBuffer * m_pendingData;
+    std::list<DataBuffer*> m_pendingSubData;
 };
 
 
